@@ -1,7 +1,16 @@
 #include <jni.h>
-#include <string>
+#include <android/log.h>
+
+
 #include<EGL/egl.h>
 #include<GLES2/gl2.h>
+
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "esUtil.h"
 
 extern "C"{
     void InitializeOpenGL();
@@ -17,10 +26,15 @@ void InitializeOpenGL()
 void resizeViewport(int newWidth, int newHeight)
 {
     glViewport(0, 0, newWidth, newHeight);
+
+    setupGraphics(newWidth, newHeight);
 }
 void renderFrame()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+
+    renderFrame1();
+
 }
 extern "C" {
     JNIEXPORT jstring JNICALL
@@ -52,3 +66,4 @@ extern "C" {
     }
 
 }
+
